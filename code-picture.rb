@@ -8,8 +8,8 @@ end
 
 require "prism"
 require "nokogiri"
-require 'prism'
-require 'nokogiri'
+require "yaml"
+require "net/http"
 
 # TODO:
 #   - CLI
@@ -29,6 +29,9 @@ def rand_color
 
   "##{red}#{green}#{blue}"
 end
+
+PRISM_CONFIG_URL = "https://raw.githubusercontent.com/ruby/prism/main/config.yml"
+ALL_TOKENS = YAML.load(Net::HTTP.get(URI(PRISM_CONFIG_URL)))["tokens"].map { _1["name"].to_sym }.freeze
 
 ONE_DARK_PRO = {
   AMPERSAND: "#282c34",
@@ -212,7 +215,14 @@ RANDOM_COLORS = {
   PERCENT: rand_color,
   KEYWORD_ENSURE: rand_color
 }.freeze
-BLACK_AND_WHITE = ->(type) { type.to_s.include?('KEYWORD') ? '#000' : '#fff' }
+
+diff = ALL_TOKENS - ONE_DARK_PRO.keys
+if diff.any?
+  diff.each do |type|
+    puts "#{type}: rand_color,"
+  end
+end
+
 TOKEN_TYPE_TO_COLOR = ONE_DARK_PRO
 
 Pixel = Data.define(:color, :type, :value)
