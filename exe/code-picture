@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require "code_picture"
+
+file = ARGV[0]
+abort("Missing file") if file.nil? || !File.exist?(file)
+
+File.write("code-picture.html", CodePicture.new(File.read(file)).to_html)
+
+puts "Created code-picture.html"

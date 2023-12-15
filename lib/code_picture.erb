@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Picture</title>
+
+  <style>
+    .pixel {
+      display: table-cell;
+      width: 15px;
+      height: 15px;
+      position: relative;
+    }
+
+    .pixel:hover::after {
+      display: block;
+      content: attr(data-content);
+      position: absolute;
+      z-index: 100;
+      top: 30px;
+      background: white;
+      color: black;
+      padding: 5px;
+      min-width: 150px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .row {
+      display: table-row;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <% rows.each do |row| %>
+      <div class="row">
+        <% row.each do |token| %>
+          <span class="pixel" data-content="<%= token.type %>" style="background-color: <%= theme.color_for(token.type) %>"></span>
+          <%# style="background-color: <%= pixel %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</body>
+</html>

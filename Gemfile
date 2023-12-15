@@ -2,4 +2,11 @@
 
 source "https://rubygems.org"
 
-gem "standard"
+# Specify your gem's dependencies in code_picture.gemspec
+# gemspec
+
+gem "nokogiri", "~> 1.15"
+gem "prism"
+gem "rake", "~> 13.0"
+gem "rspec", "~> 3.0"
+gem "standard", "~> 1.31"
