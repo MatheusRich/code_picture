@@ -17,7 +17,7 @@ require "net/http"
 #   - Use ERB instead of Nokogiri?
 
 file = ARGV[0]
-abort("Missing file") if file.nil?
+abort("Missing file") if file.nil? || !File.exist?(file)
 
 result = Prism.lex_file(file)
 abort("Failed to parse file: #{result.errors}") if result.failure?
@@ -33,7 +33,7 @@ end
 PRISM_CONFIG_URL = "https://raw.githubusercontent.com/ruby/prism/main/config.yml"
 ALL_TOKENS = YAML.load(Net::HTTP.get(URI(PRISM_CONFIG_URL)))["tokens"].map { _1["name"].to_sym }.freeze
 
-ONE_DARK_PRO = {
+ONE_DARK_PRO_THEME = {
   AMPERSAND: "#282c34",
   AMPERSAND_AMPERSAND: "#282c34",
   BACKTICK: "#282c34",
@@ -125,7 +125,7 @@ ONE_DARK_PRO = {
   MINUS_GREATER: "#282c34",
   LAMBDA_BEGIN: "#282c34"
 }.freeze
-RANDOM_COLORS = {
+RANDOM_COLORS_THEME = {
   BRACE_LEFT: rand_color,
   BRACE_RIGHT: rand_color,
   COMMA: rand_color,
@@ -216,14 +216,17 @@ RANDOM_COLORS = {
   KEYWORD_ENSURE: rand_color
 }.freeze
 
-diff = ALL_TOKENS - ONE_DARK_PRO.keys
-if diff.any?
-  diff.each do |type|
-    puts "#{type}: rand_color,"
+if ENV.has_key?("DEBUG")
+  diff = ALL_TOKENS - ONE_DARK_PRO_THEME.keys
+  if diff.any?
+    puts "Missing tokens in theme:"
+    diff.each do |type|
+      puts "#{type}: rand_color,"
+    end
   end
 end
 
-TOKEN_TYPE_TO_COLOR = ONE_DARK_PRO
+THEME = ONE_DARK_PRO_THEME
 
 Pixel = Data.define(:color, :type, :value)
 
@@ -234,7 +237,7 @@ pixels = result.value.filter_map do |(token, _)|
   next if token.type == :NEWLINE
   next if token.type == :EOF
 
-  color = TOKEN_TYPE_TO_COLOR[token.type].tap do |color|
+  color = THEME[token.type].tap do |color|
     (missing << token.type) if color.nil?
   end
 
