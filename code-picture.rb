@@ -54,15 +54,15 @@ ONE_DARK_PRO_THEME = {
   DOT_DOT_DOT: "#282c34",
   EMBEXPR_BEGIN: "#282c34",
   EMBEXPR_END: "#282c34",
-  EOF: rand_color,
   EQUAL: "#282c34",
   EQUAL_EQUAL: "#282c34",
   EQUAL_GREATER: "#282c34",
   FLOAT: "#e5c07b",
   GREATER: "#282c34",
   GREATER_EQUAL: "#282c34",
+  HEREDOC_END: "#98c379",
+  HEREDOC_START: "#98c379",
   IDENTIFIER: "#e06c75",
-  IGNORED_NEWLINE: rand_color,
   INSTANCE_VARIABLE: "#e06c75",
   INTEGER: "#e5c07b",
   KEYWORD_ALIAS: "#C678DD",
@@ -80,6 +80,7 @@ ONE_DARK_PRO_THEME = {
   KEYWORD_IF: "#C678DD",
   KEYWORD_IF_MODIFIER: "#c678dd",
   KEYWORD_MODULE: "#C678DD",
+  KEYWORD_NEXT: "#C678DD",
   KEYWORD_NIL: "#e5c07b",
   KEYWORD_RESCUE: "#C678DD",
   KEYWORD_RETURN: "#c678dd",
@@ -92,6 +93,8 @@ ONE_DARK_PRO_THEME = {
   KEYWORD_WHEN: "#C678DD",
   KEYWORD_YIELD: "#C678DD",
   LABEL: "#56b6c2",
+  LABEL_END: "#56b6c2",
+  LAMBDA_BEGIN: "#282c34",
   LESS: "#282c34",
   LESS_EQUAL: "#282c34",
   LESS_EQUAL_GREATER: "#282c34",
@@ -99,7 +102,7 @@ ONE_DARK_PRO_THEME = {
   METHOD_NAME: "#61afef",
   MINUS: "#282c34",
   MINUS_EQUAL: "#282c34",
-  NEWLINE: rand_color,
+  MINUS_GREATER: "#282c34",
   PARENTHESIS_LEFT: "#282c34",
   PARENTHESIS_LEFT_PARENTHESES: "#282c34",
   PARENTHESIS_RIGHT: "#282c34",
@@ -120,10 +123,7 @@ ONE_DARK_PRO_THEME = {
   SYMBOL_BEGIN: "#282c34",
   UAMPERSAND: "#56b6c2",
   USTAR: "#56b6c2",
-  USTAR_STAR: "#56b6c2",
-  WORDS_SEP: rand_color,
-  MINUS_GREATER: "#282c34",
-  LAMBDA_BEGIN: "#282c34"
+  USTAR_STAR: "#56b6c2"
 }.freeze
 RANDOM_COLORS_THEME = {
   BRACE_LEFT: rand_color,
@@ -251,7 +251,7 @@ if missing.any?
   exit 1
 end
 
-row_size = Math.sqrt(pixels.size).floor
+row_size = Math.sqrt(pixels.size).ceil
 
 builder = Nokogiri::HTML4::Builder.new do |doc|
   doc.html do
