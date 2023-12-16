@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 # Specify your gem's dependencies in code_picture.gemspec
-# gemspec
+gemspec
 
 gem "nokogiri", "~> 1.15", ">= 1.15.5"
 gem "prism"
