@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "code_picture"
+require "nokogiri"
 
 Dir[File.join(__dir__, "support/**/*.rb")].sort.each { require _1 }
 

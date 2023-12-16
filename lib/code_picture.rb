@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "nokogiri"
 require "prism"
 require "erb"
 require_relative "theme"
