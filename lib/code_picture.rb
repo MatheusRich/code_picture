@@ -13,6 +13,7 @@ class CodePicture
     NEWLINE
     WORDS_SEP
   ]
+  HTML_TEMPLATE = File.read(File.expand_path("../code_picture/template.erb", __FILE__))
 
   def initialize(code, options = Options.default)
     @tokens = Prism
@@ -30,8 +31,7 @@ class CodePicture
     row_size = Math.sqrt(@tokens.size).ceil
     rows = @tokens.each_slice(row_size)
 
-    ERB.new(File.read(File.expand_path("../code_picture/template.erb", __FILE__)))
-      .result(binding)
+    ERB.new(HTML_TEMPLATE).result(binding)
   end
 
   private
