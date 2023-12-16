@@ -39,7 +39,7 @@ RSpec.describe CodePicture do
 
       picture = CodePicture.new(code, options).to_html
 
-      style = Nokogiri::HTML(picture).at("style").text.match(//)[1]
+      style = Nokogiri::HTML(picture).at("style").text.match(/\.pixel\s*{([^}]*)}/)[1]
       expect(style).to include "width: 42px;"
       expect(style).to include "height: 42px;"
     end
