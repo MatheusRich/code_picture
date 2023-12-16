@@ -3,6 +3,7 @@
 require "prism"
 require "erb"
 require_relative "code_picture/version"
+require_relative "code_picture/options"
 require_relative "code_picture/theme"
 
 class CodePicture
@@ -13,7 +14,7 @@ class CodePicture
     WORDS_SEP
   ]
 
-  def initialize(code, theme: Theme.one_dark_pro)
+  def initialize(code, options = Options.default)
     @tokens = Prism
       .lex(code)
       .value
@@ -22,7 +23,7 @@ class CodePicture
 
         token
       }
-    @theme = theme
+    @options = options
   end
 
   def to_html
@@ -33,5 +34,9 @@ class CodePicture
       .result(binding)
   end
 
-  private attr_reader :theme
+  private
+
+  def theme = @options.theme
+
+  def pixel_size = @options.pixel_size
 end

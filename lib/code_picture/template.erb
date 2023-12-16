@@ -8,8 +8,8 @@
   <style>
     .pixel {
       display: table-cell;
-      width: 15px;
-      height: 15px;
+      width: <%= pixel_size %>px;
+      height: <%= pixel_size %>px;
       position: relative;
     }
 
@@ -37,8 +37,9 @@
     <% rows.each do |row| %>
       <div class="row">
         <% row.each do |token| %>
-          <span class="pixel" data-content="<%= token.type %>" style="background-color: <%= theme.color_for(token.type) %>"></span>
-          <%# style="background-color: <%= pixel %>
+          <span class="pixel"
+                data-content="<%= token.type %>"
+                style="background-color: <%= theme.color_for(token.type) %>"></span>
         <% end %>
       </div>
     <% end %>

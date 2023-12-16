@@ -12,14 +12,15 @@ RSpec.describe CodePicture do
 
     it "creates one pixel per token in the code" do
       code = "puts 'Hello World!'"
+      options = CodePicture::Options.default
 
-      picture = CodePicture.new(code, theme: CodePicture::Theme.one_dark_pro).to_html
+      picture = CodePicture.new(code, options).to_html
 
       tokens = extract_tokens(code)
       expected_number_of_pixels = tokens.size
       expect(picture).to have_n_pixels(expected_number_of_pixels)
       tokens.each do |token|
-        expect(picture).to have_pixel(token, theme: CodePicture::Theme.one_dark_pro)
+        expect(picture).to have_pixel(token, options.theme)
       end
     end
 
@@ -32,13 +33,24 @@ RSpec.describe CodePicture do
       expect(picture).to have_n_rows(expected_number_of_rows)
     end
 
+    it "has configurable pixel size" do
+      code = "puts :hello"
+      options = CodePicture::Options.default.with(pixel_size: 42)
+
+      picture = CodePicture.new(code, options).to_html
+
+      style = Nokogiri::HTML(picture).at("style").text.match(//)[1]
+      expect(style).to include "width: 42px;"
+      expect(style).to include "height: 42px;"
+    end
+
     private
 
     def have_n_pixels(expected_number_of_pixels)
       HasCss.new(".pixel", count: expected_number_of_pixels)
     end
 
-    def have_pixel(token, theme:)
+    def have_pixel(token, theme)
       HasCss.new(%(.pixel[data-content*="#{token.type}"][style*="background-color: #{theme.color_for(token.type)}"]))
     end
 
