@@ -19,11 +19,7 @@ class CodePicture
     @tokens = Prism
       .lex(code)
       .value
-      .filter_map { |token, _|
-        next if IGNORED_TOKENS.include?(token.type)
-
-        token
-      }
+      .filter_map { |token, _| token if !IGNORED_TOKENS.include?(token.type) }
     @options = options
   end
 
