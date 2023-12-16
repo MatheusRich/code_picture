@@ -2,6 +2,7 @@
 
 require "prism"
 require "erb"
+require_relative "code_picture/version"
 require_relative "theme"
 
 class CodePicture
@@ -28,7 +29,7 @@ class CodePicture
     row_size = Math.sqrt(@tokens.size).ceil
     rows = @tokens.each_slice(row_size)
 
-    ERB.new(File.read(File.expand_path("../code_picture.erb", __FILE__)))
+    ERB.new(File.read(File.expand_path("../template.erb", __FILE__)))
       .result(binding)
   end
 
