@@ -46,6 +46,22 @@ RSpec.describe CodePicture::Cli do
       end
     end
 
+    context "with --output" do
+      it "writes the code picture to the given file path" do
+        argv = [fixture_file_path("sample.rb"), "--output", "my-code-picture.html"]
+
+        result = nil
+        expect {
+          result = CodePicture::Cli.new.call(argv)
+        }.to output(/Generated code picture and wrote it to `my-code-picture.html`/).to_stdout
+
+        expect(result).to be_successful
+        expect(File.read("my-code-picture.html")).to eq fixture_file("sample-code-picture-snapshot.html")
+
+        File.delete("my-code-picture.html") if File.exist?("my-code-picture.html")
+      end
+    end
+
     context "with --version" do
       it "prints the version" do
         cli = CodePicture::Cli.new

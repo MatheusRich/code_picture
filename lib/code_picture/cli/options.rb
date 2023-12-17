@@ -1,17 +1,13 @@
 class CodePicture
   class Cli
     Options = Data.define(:command, :command_options) do
-      def self.empty = new(command: nil, command_options: Commands::TakePicture::Options.empty)
+      def self.empty = new(command: nil, command_options: Commands::TakePicture::Options.default)
 
       def self.from(argv)
         options = Cli::Options.empty
 
         opt_parser = OptionParser.new do |parser|
           parser.banner = "Usage: code-picture path-to-file.rb [options]"
-
-          parser.on("-v", "--version", "Displays app version") do
-            options = options.with(command: Commands::Version, command_options: nil)
-          end
 
           parser.on("-p", "--pixel-size=SIZE", Integer, "Define the pixel size of the generated image") do |size|
             command_options = options.command_options.with(pixel_size: size)
@@ -23,6 +19,14 @@ class CodePicture
             options = options.with(command_options:)
           end
 
+          parser.on("-o", "--output=FILE", String, "Write the generated image to the given file path") do |file|
+            command_options = options.command_options.with(output_file_path: file)
+            options = options.with(command_options:)
+          end
+
+          parser.on("-v", "--version", "Displays app version") do
+            options = options.with(command: Commands::Version, command_options: nil)
+          end
           parser.on("-h", "--help", "Prints this help") do
             options = Cli::Options.new(
               command: Commands::Help,
