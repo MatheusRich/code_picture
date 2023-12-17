@@ -2,9 +2,9 @@
 
 require "prism"
 require "erb"
-require_relative "code_picture/version"
-require_relative "code_picture/options"
-require_relative "code_picture/theme"
+require "zeitwerk"
+
+Zeitwerk::Loader.for_gem.setup
 
 class CodePicture
   IGNORED_TOKENS = %i[

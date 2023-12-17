@@ -3,6 +3,7 @@ PATH
   specs:
     code_picture (0.1.0)
       prism (~> 0.19.0)
+      zeitwerk (~> 2.6)
 
 GEM
   remote: https://rubygems.org/
@@ -69,6 +70,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.19.1)
     unicode-display_width (2.5.0)
+    zeitwerk (2.6.12)
 
 PLATFORMS
   x86_64-darwin-22
