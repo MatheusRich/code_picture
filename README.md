@@ -24,7 +24,32 @@ gem install code_picture
 
 ### CLI
 
-TO DO
+Install the gem
+
+```sh
+gem install code_picture
+```
+
+Then run the command:
+
+```sh
+code-picture path-to-file.rb
+```
+
+This will generate a `code-picture.html` file in the current directory.
+
+#### Options
+
+You can customize the generated image and the output file with the following
+options:
+
+```
+Usage: code-picture path-to-file.rb [options]
+    -v, --version                    Displays app version
+    -p, --pixel-size=SIZE            Define the pixel size of the generated image
+    -t, --theme=THEME                Define the theme of the generated image
+    -h, --help                       Prints this help
+```
 
 ### As a library
 
