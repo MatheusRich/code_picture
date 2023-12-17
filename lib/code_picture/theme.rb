@@ -77,6 +77,8 @@ class CodePicture
         PERCENT: "#282c34",
         PERCENT_EQUAL: "#282c34",
         PERCENT_LOWER_I: "#56b6c2",
+        REGEXP_BEGIN: "#e06c75",
+        REGEXP_END: "#e06c75",
         PIPE: "#282c34",
         PIPE_PIPE: "#282c34",
         PLUS: "#282c34",
