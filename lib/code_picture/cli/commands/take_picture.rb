@@ -2,8 +2,8 @@ class CodePicture
   class Cli
     module Commands
       module TakePicture
-        Options = Data.define(:file_path, *CodePicture::Options.members) do
-          def self.empty = new(file_path: nil, **CodePicture::Options.default.to_h)
+        Options = Data.define(:input_file_path, *CodePicture::Options.members) do
+          def self.empty = new(input_file_path: nil, **CodePicture::Options.default.to_h)
         end
 
         extend self
@@ -14,13 +14,13 @@ class CodePicture
 
           Result::Success.new(value: code_picture)
         rescue Errno::ENOENT
-          Result::Failure.new(error: "Couldn't find file `#{options.file_path}`")
+          Result::Failure.new(error: "Couldn't find file `#{options.input_file_path}`")
         end
 
         private
 
         def take_picture(options)
-          source_code = File.read(options.file_path)
+          source_code = File.read(options.input_file_path)
 
           ::CodePicture.new(source_code, CodePicture::Options.from(options)).to_html
         end

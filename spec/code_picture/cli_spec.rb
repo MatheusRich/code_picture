@@ -42,7 +42,7 @@ RSpec.describe CodePicture::Cli do
         }.to output(/Usage: code-picture/).to_stdout
 
         expect(result).to be_failed
-        expect(result.error).to eq("Missing file path")
+        expect(result.error).to eq("Missing input file path")
       end
     end
 

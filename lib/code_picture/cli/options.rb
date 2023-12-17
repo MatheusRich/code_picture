@@ -40,16 +40,16 @@ class CodePicture
           )
         end
 
-        if (file_path = argv.first)
+        if (input_file_path = argv.first)
           options.with(
             command: Commands::TakePicture,
-            command_options: options.command_options.with(file_path:)
+            command_options: options.command_options.with(input_file_path:)
           )
         elsif options.command.nil?
           options.with(
             command: Commands::Help,
             command_options: Commands::Help::Options.new(
-              error: "Missing file path",
+              error: "Missing input file path",
               help_text: opt_parser.to_s
             )
           )
