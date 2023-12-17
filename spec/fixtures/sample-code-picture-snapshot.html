@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Picture</title>
+
+  <style>
+    .pixel {
+      display: table-cell;
+      width: 15px;
+      height: 15px;
+      position: relative;
+    }
+
+    .pixel:hover::after {
+      display: block;
+      content: attr(data-content);
+      position: absolute;
+      z-index: 100;
+      top: 30px;
+      background: white;
+      color: black;
+      padding: 5px;
+      min-width: 150px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .row {
+      display: table-row;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    
+      <div class="row">
+        
+          <span class="pixel"
+                data-content="COMMENT"
+                style="background-color: #5c6370"></span>
+        
+          <span class="pixel"
+                data-content="CONSTANT"
+                style="background-color: #e5c07b"></span>
+        
+          <span class="pixel"
+                data-content="EQUAL"
+                style="background-color: #282c34"></span>
+        
+          <span class="pixel"
+                data-content="CONSTANT"
+                style="background-color: #e5c07b"></span>
+        
+      </div>
+    
+      <div class="row">
+        
+          <span class="pixel"
+                data-content="DOT"
+                style="background-color: #282c34"></span>
+        
+          <span class="pixel"
+                data-content="IDENTIFIER"
+                style="background-color: #e06c75"></span>
+        
+          <span class="pixel"
+                data-content="KEYWORD_DEF"
+                style="background-color: #C678DD"></span>
+        
+          <span class="pixel"
+                data-content="IDENTIFIER"
+                style="background-color: #e06c75"></span>
+        
+      </div>
+    
+      <div class="row">
+        
+          <span class="pixel"
+                data-content="EQUAL"
+                style="background-color: #282c34"></span>
+        
+          <span class="pixel"
+                data-content="INTEGER"
+                style="background-color: #e5c07b"></span>
+        
+          <span class="pixel"
+                data-content="IDENTIFIER"
+                style="background-color: #e06c75"></span>
+        
+          <span class="pixel"
+                data-content="SYMBOL_BEGIN"
+                style="background-color: #282c34"></span>
+        
+      </div>
+    
+      <div class="row">
+        
+          <span class="pixel"
+                data-content="IDENTIFIER"
+                style="background-color: #e06c75"></span>
+        
+      </div>
+    
+  </div>
+</body>
+</html>

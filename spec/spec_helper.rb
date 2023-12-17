@@ -16,3 +16,11 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+def fixture_file_path(file_name)
+  File.join(__dir__, "fixtures", file_name)
+end
+
+def fixture_file(file_name)
+  File.read(fixture_file_path(file_name))
+end
