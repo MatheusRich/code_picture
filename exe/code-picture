@@ -6,4 +6,4 @@ require "code_picture"
 
 CodePicture::Cli.new
   .call(ARGV)
-  .on_failure { abort _1 }
+  .on_failure { abort "Error: #{_1}" }
