@@ -11,7 +11,7 @@ RSpec.describe CodePicture::Cli::Options do
         options = CodePicture::Cli::Options.from(argv)
 
         expect(options.command_options.pixel_size).to eq(20)
-        expect(options.command).to eq CodePicture::Cli::Commands::CodePicture
+        expect(options.command).to eq CodePicture::Cli::Commands::TakePicture
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe CodePicture::Cli::Options do
         options = CodePicture::Cli::Options.from(argv)
 
         expect(options.command_options.theme).to eq("monokai")
-        expect(options.command).to eq CodePicture::Cli::Commands::CodePicture
+        expect(options.command).to eq CodePicture::Cli::Commands::TakePicture
       end
     end
 

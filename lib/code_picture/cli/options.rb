@@ -1,7 +1,7 @@
 class CodePicture
   class Cli
     Options = Data.define(:command, :command_options) do
-      def self.empty = new(command: nil, command_options: Commands::CodePicture::Options.empty)
+      def self.empty = new(command: nil, command_options: Commands::TakePicture::Options.empty)
 
       def self.from(argv)
         options = Cli::Options.empty
@@ -42,7 +42,7 @@ class CodePicture
 
         if (file_path = argv.first)
           options.with(
-            command: Commands::CodePicture,
+            command: Commands::TakePicture,
             command_options: options.command_options.with(file_path:)
           )
         elsif options.command.nil?

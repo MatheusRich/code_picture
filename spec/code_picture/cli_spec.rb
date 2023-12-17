@@ -5,14 +5,19 @@ require "spec_helper"
 RSpec.describe CodePicture::Cli do
   describe "#call" do
     context "with file name" do
-      # it "generates a code picture and writes it to a file" do
-      it "generates a code picture and returns it" do
+      it "generates a code picture and writes it to a file" do
         argv = [fixture_file_path("sample.rb")]
 
-        result = CodePicture::Cli.new.call(argv)
+        result = nil
+        expect {
+          result = CodePicture::Cli.new.call(argv)
+        }.to output(/Generated code picture and wrote it to `code-picture.html`/).to_stdout
 
         expect(result).to be_successful
         expect(result.value).to eq fixture_file("sample-code-picture-snapshot.html")
+        expect(File.read("code-picture.html")).to eq fixture_file("sample-code-picture-snapshot.html")
+
+        File.delete("code-picture.html") if File.exist?("code-picture.html")
       end
     end
 
