@@ -52,10 +52,6 @@ Usage: code-picture path-to-file.rb [options]
     -h, --help                       Prints this help
 ```
 
-### As a library
-
-TO DO
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
