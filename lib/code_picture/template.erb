@@ -9,7 +9,11 @@
     .pixel {
       display: table-cell;
       width: <%= pixel_size %>px;
+      min-width: <%= pixel_size %>px;
+      max-width: <%= pixel_size %>px;
       height: <%= pixel_size %>px;
+      min-height: <%= pixel_size %>px;
+      max-height: <%= pixel_size %>px;
       position: relative;
     }
 
