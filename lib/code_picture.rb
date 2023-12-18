@@ -24,7 +24,7 @@ class CodePicture
   end
 
   def to_html
-    row_size = Math.sqrt(@tokens.size).ceil
+    row_size = @options.max_pixels_per_row || Math.sqrt(@tokens.size).ceil
     rows = @tokens.each_slice(row_size)
 
     ERB.new(HTML_TEMPLATE).result(binding)

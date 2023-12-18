@@ -24,12 +24,26 @@ RSpec.describe CodePicture do
       end
     end
 
-    it "creates √tokens (rounded up) rows of pixels" do
-      code = "puts :hello"
+    it "creates √tokens (rounded up) pixels per row" do
+      code = "1 + 2 + 3 + 4 + 5 + 6" # 11 tokens. √11 ≈ 3.3
 
       picture = CodePicture.new(code).to_html
 
-      expected_number_of_rows = Math.sqrt(extract_tokens(code).size).ceil
+      n_tokens = extract_tokens(code).size
+      row_size = Math.sqrt(n_tokens).ceil
+      expected_number_of_rows = (n_tokens.to_f / row_size).ceil
+      expect(picture).to have_n_rows(expected_number_of_rows)
+    end
+
+    it "allows to configure the number of pixels per row" do
+      code = "1 + 2 + 3 + 4 + 5 + 6" # 11 tokens. √11 ≈ 3.3
+      options = CodePicture::Options.default.with(max_pixels_per_row: 2)
+
+      picture = CodePicture.new(code, options).to_html
+
+      n_tokens = extract_tokens(code).size
+      row_size = options.max_pixels_per_row
+      expected_number_of_rows = (n_tokens.to_f / row_size).ceil
       expect(picture).to have_n_rows(expected_number_of_rows)
     end
 
