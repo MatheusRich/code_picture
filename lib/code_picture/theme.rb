@@ -1,5 +1,26 @@
 class CodePicture
   Theme = Data.define(:colors) do
+    def self.find_or_default(name)
+      case name.to_s.tr("-", "_")
+      when "one_dark_pro"
+        one_dark_pro
+      when "random"
+        random
+      else
+        warn "Couldn't find theme `#{other.theme}`. Using default theme."
+        Theme.default
+      end
+    end
+
+    def self.default = one_dark_pro
+
+    def self.random
+      theme = {}
+      new(->(token_type) {
+        theme[token_type] ||= random_hex_color
+      })
+    end
+
     def self.one_dark_pro
       new({
         AMPERSAND: "#282c34",
@@ -99,8 +120,13 @@ class CodePicture
       })
     end
 
-    def color_for(token)
-      colors.fetch(token)
+    def self.random_hex_color
+      "#%06x" % (rand * 0xffffff)
+    end
+    private_class_method :random_hex_color
+
+    def color_for(token_type)
+      colors[token_type]
     end
   end
 end

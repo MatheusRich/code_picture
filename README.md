@@ -45,9 +45,10 @@ options:
 
 ```
 Usage: code-picture path-to-file.rb [options]
-    -v, --version                    Displays app version
     -p, --pixel-size=SIZE            Define the pixel size of the generated image
-    -t, --theme=THEME                Define the theme of the generated image
+    -t, --theme=THEME                Define the theme of the generated image [options: one-dark-pro (default), random]
+    -o, --output=FILE                Write the generated image to the given file path
+    -v, --version                    Displays app version
     -h, --help                       Prints this help
 ```
 

@@ -14,7 +14,7 @@ class CodePicture
             options = options.with(command_options:)
           end
 
-          parser.on("-t", "--theme=THEME", String, "Define the theme of the generated image") do |theme|
+          parser.on("-t", "--theme=THEME", String, "Define the theme of the generated image [options: one-dark-pro (default), random]") do |theme|
             command_options = options.command_options.with(theme: theme)
             options = options.with(command_options:)
           end
