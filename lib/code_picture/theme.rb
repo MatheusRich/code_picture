@@ -17,7 +17,7 @@ class CodePicture
     def self.random
       theme = {}
       new(->(token_type) {
-        theme[token_type] ||= random_hex_color
+        theme[token_type] ||= random_color
       })
     end
 
@@ -120,10 +120,10 @@ class CodePicture
       })
     end
 
-    def self.random_hex_color
-      "#%06x" % (rand * 0xffffff)
+    def self.random_color
+      "hsl(#{rand(0..360)},#{rand(42..98)}%,#{rand(40..90)}%)"
     end
-    private_class_method :random_hex_color
+    private_class_method :random_color
 
     def color_for(token_type)
       colors[token_type]
