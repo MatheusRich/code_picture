@@ -38,15 +38,15 @@
 </head>
 <body>
   <div>
-    <% rows.each do |row| %>
+    <%- rows.each do |row| -%>
       <div class="row">
-        <% row.each do |token| %>
+        <%- row.each do |token| -%>
           <span class="pixel"
                 data-content="<%= token.type %>"
                 style="background-color: <%= theme.color_for(token.type) %>"></span>
-        <% end %>
+        <%- end -%>
       </div>
-    <% end %>
+    <%- end -%>
   </div>
 </body>
 </html>
