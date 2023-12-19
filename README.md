@@ -6,20 +6,6 @@ simple HTML pixel art.
 
 [Prism parser]: https://github.com/ruby/prism
 
-## Installation
-
-Simply add the gem to your Gemfile:
-
-```ruby
-bundle add code_picture
-```
-
-or install it globally:
-
-```ruby
-gem install code_picture
-```
-
 ## Usage
 
 ### CLI
