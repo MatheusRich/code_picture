@@ -12,6 +12,8 @@ class CodePicture
     IGNORED_NEWLINE
     NEWLINE
     WORDS_SEP
+    MISSING
+    NOT_PROVIDED
   ]
   HTML_TEMPLATE = File.read(File.expand_path("../code_picture/template.erb", __FILE__))
 
