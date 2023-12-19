@@ -4,7 +4,7 @@ class CodePicture
 
     def self.from(other)
       theme = if other.theme.is_a?(String)
-        Theme.find_or_default(other.theme)
+        Theme.find(other.theme)
       else
         other.theme
       end

@@ -46,7 +46,8 @@ options:
 ```
 Usage: code-picture path-to-file.rb [options]
     -p, --pixel-size=SIZE            Define the pixel size of the generated image
-    -t, --theme=THEME                Define the theme of the generated image [options: one-dark-pro (default), random]
+    -r, --max-pixels-per-row=SIZE    Define the maximum number of pixels per row
+    -t, --theme=THEME                Define the theme of the generated image [options: one-dark-pro (default), random, or a path to a YAML file]
     -o, --output=FILE                Write the generated image to the given file path
     -v, --version                    Displays app version
     -h, --help                       Prints this help

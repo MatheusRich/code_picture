@@ -46,6 +46,55 @@ RSpec.describe CodePicture::Cli do
       end
     end
 
+    context "when specifying a theme from a YAML file" do
+      it "generates a code picture with the theme" do
+        argv = [fixture_file_path("sample.rb"), "--theme", fixture_file_path("sample-theme.yml")]
+
+        result = nil
+        expect {
+          result = CodePicture::Cli.new.call(argv)
+        }.to output(/Generated code picture and wrote it to `code-picture.html`/).to_stdout
+
+        expect(result).to be_successful
+        expect(File.read("code-picture.html")).to eq fixture_file("custom-theme-code-picture-snapshot.html")
+
+        File.delete("code-picture.html") if File.exist?("code-picture.html")
+      end
+    end
+
+    context "when specifying a theme from a YAML file that doesn't exist" do
+      it "returns an error" do
+        argv = [fixture_file_path("sample.rb"), "--theme", "unknown-theme.yml"]
+
+        result = CodePicture::Cli.new.call(argv)
+
+        expect(result).to be_failed
+        expect(result.error).to eq("Couldn't find theme file `unknown-theme.yml`")
+      end
+    end
+
+    context "with a theme file with invalid syntax" do
+      it "returns an error" do
+        argv = [fixture_file_path("sample.rb"), "--theme", fixture_file_path("invalid-syntax-theme.yml")]
+
+        result = CodePicture::Cli.new.call(argv)
+
+        expect(result).to be_failed
+        expect(result.error).to eq("Invalid syntax in theme file `#{fixture_file_path("invalid-syntax-theme.yml")}`")
+      end
+    end
+
+    context "with a theme file that is not a mapping of token types to colors" do
+      it "returns an error" do
+        argv = [fixture_file_path("sample.rb"), "--theme", fixture_file_path("invalid-theme.yml")]
+
+        result = CodePicture::Cli.new.call(argv)
+
+        expect(result).to be_failed
+        expect(result.error).to eq("Theme file `#{fixture_file_path("invalid-theme.yml")}` must be a mapping of token types to colors")
+      end
+    end
+
     context "with --output" do
       it "writes the code picture to the given file path" do
         argv = [fixture_file_path("sample.rb"), "--output", "my-code-picture.html"]

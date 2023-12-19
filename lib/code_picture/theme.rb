@@ -1,15 +1,31 @@
 class CodePicture
   Theme = Data.define(:colors) do
-    def self.find_or_default(name)
+    self::ParseError = Class.new(StandardError)
+
+    def self.find(name)
       case name.to_s.tr("-", "_")
       when "one_dark_pro"
         one_dark_pro
       when "random"
         random
       else
-        warn "Couldn't find theme `#{other.theme}`. Using default theme."
-        Theme.default
+        from_file(name)
       end
+    end
+
+    def self.from_file(file_name)
+      require "yaml"
+      colors = YAML.load_file(file_name, symbolize_names: true)
+
+      unless colors.is_a?(Hash)
+        raise self::ParseError, "Theme file `#{file_name}` must be a mapping of token types to colors"
+      end
+
+      new(colors:)
+    rescue Psych::SyntaxError
+      raise self::ParseError, "Invalid syntax in theme file `#{file_name}`"
+    rescue Errno::ENOENT
+      raise self::ParseError, "Couldn't find theme file `#{file_name}`"
     end
 
     def self.default = one_dark_pro

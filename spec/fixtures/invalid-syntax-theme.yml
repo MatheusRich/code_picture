@@ -1,0 +1,7 @@
+name: John Doe
+age: 30
+address:
+  street: 123 Main Street
+  city: New York
+  country: USA
+    postal_code: 10001  # Malformed indentation
