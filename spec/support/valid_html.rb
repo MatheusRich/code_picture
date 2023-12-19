@@ -1,3 +1,5 @@
+require "nokogiri"
+
 module ValidHtmlHelper
   class ValidHtmlChecker
     def matches?(string)
