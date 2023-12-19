@@ -95,6 +95,17 @@ RSpec.describe CodePicture::Cli do
       end
     end
 
+    context "when the file theme doesn't have a color for a token type" do
+      it "returns an error" do
+        argv = [fixture_file_path("sample.rb"), "--theme", fixture_file_path("missing-token-type-theme.yml")]
+
+        result = CodePicture::Cli.new.call(argv)
+
+        expect(result).to be_failed
+        expect(result.error).to eq("No theme color defined for token type `KEYWORD_DEF`")
+      end
+    end
+
     context "with --output" do
       it "writes the code picture to the given file path" do
         argv = [fixture_file_path("sample.rb"), "--output", "my-code-picture.html"]

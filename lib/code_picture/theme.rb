@@ -1,6 +1,6 @@
 class CodePicture
   Theme = Data.define(:colors) do
-    self::ParseError = Class.new(StandardError)
+    self::Error = Class.new(StandardError)
 
     def self.find(name)
       case name.to_s.tr("-", "_")
@@ -18,14 +18,14 @@ class CodePicture
       colors = YAML.load_file(file_name, symbolize_names: true)
 
       unless colors.is_a?(Hash)
-        raise self::ParseError, "Theme file `#{file_name}` must be a mapping of token types to colors"
+        raise self::Error, "Theme file `#{file_name}` must be a mapping of token types to colors"
       end
 
       new(colors:)
     rescue Psych::SyntaxError
-      raise self::ParseError, "Invalid syntax in theme file `#{file_name}`"
+      raise self::Error, "Invalid syntax in theme file `#{file_name}`"
     rescue Errno::ENOENT
-      raise self::ParseError, "Couldn't find theme file `#{file_name}`"
+      raise self::Error, "Couldn't find theme file `#{file_name}`"
     end
 
     def self.default = one_dark_pro
@@ -142,7 +142,7 @@ class CodePicture
     private_class_method :random_color
 
     def color_for(token_type)
-      colors[token_type]
+      colors[token_type] || raise(self.class::Error, "No theme color defined for token type `#{token_type}`")
     end
   end
 end

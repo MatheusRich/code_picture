@@ -19,7 +19,7 @@ class CodePicture
           Result::Success.new(value: code_picture)
         rescue Errno::ENOENT
           Result::Failure.new(error: "Couldn't find file `#{options.input_file_path}`")
-        rescue CodePicture::Theme::ParseError => error
+        rescue CodePicture::Theme::Error => error
           Result::Failure.new(error: error.message)
         end
 
