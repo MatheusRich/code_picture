@@ -1,5 +1,7 @@
 # Code Picture
 
+![Code Picture](./code-picture.png)
+
 Code Picture parses a Ruby file and generates a picture of the code structure.
 It leverages the [Prism parser] to lex the code and then generates a
 simple HTML pixel art.
