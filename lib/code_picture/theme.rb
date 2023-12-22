@@ -42,7 +42,7 @@ class CodePicture
     end
 
     def self.random_color
-      "hsl(#{rand(0..360)},#{rand(42..98)}%,#{rand(40..90)}%)"
+      "hsl(#{rand(0..360)},#{rand(70..110)}%,#{rand(40..90)}%)"
     end
     private_class_method :random_color
 
