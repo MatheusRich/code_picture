@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ["matheusrichardt@gmail.com"]
 
   spec.summary = "Transform your code into a picture."
-  spec.description = "CodePicture lexes your code and assign a color to each token. Then, it generates a picture with the same size as the code, where each pixel represents a token."
+  spec.description = "Transform your code into a pixel art!"
   spec.homepage = "https://github.com/MatheusRich/code_picture"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
