@@ -55,8 +55,10 @@ git commits and the created tag, and push the `.gem` file to
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at
-https://github.com/[USERNAME]/code_picture.
+Hey! Thanks for considering contributing to this project. If you have an idea of
+a feature, found a bug, or just want to change a color in the existing themes,
+feel free to open an issue or a pull request on GitHub at
+https://github.com/MatheusRich/code_picture.
 
 ## License
 
